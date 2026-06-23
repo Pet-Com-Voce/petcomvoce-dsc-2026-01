@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -26,8 +27,8 @@ export enum AppointmentStatus {
 
 @Entity("appointments")
 export class Appointment {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "timestamptz" })
   dataHora: Date;
@@ -48,14 +49,14 @@ export class Appointment {
   @ManyToOne(() => Pet)
   pet: Pet;
 
-  @Column()
-  petId: string;
+  @Column({ type: "int" })
+  petId: number;
 
   @ManyToOne(() => Employee)
   funcionario: Employee;
 
-  @Column()
-  funcionarioId: string;
+  @Column({ type: "int" })
+  funcionarioId: number;
 
   @Column({ type: "text", nullable: true })
   observacoes: string | null;
@@ -65,4 +66,7 @@ export class Appointment {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn({ nullable: true })
+  deletedAt: Date | null;
 }

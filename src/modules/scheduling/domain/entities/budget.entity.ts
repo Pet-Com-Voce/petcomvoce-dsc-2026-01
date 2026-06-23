@@ -16,14 +16,14 @@ export enum BudgetStatus {
 
 @Entity("budgets")
 export class Budget {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @ManyToOne(() => Appointment, { onDelete: "CASCADE" })
   appointment: Appointment;
 
-  @Column()
-  appointmentId: string;
+  @Column({ type: "int" })
+  appointmentId: number;
 
   @Column({ type: "decimal", precision: 10, scale: 2 })
   valor: number;

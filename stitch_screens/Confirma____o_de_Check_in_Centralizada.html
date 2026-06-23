@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Check-in Confirmation Dialog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "inverse-primary": "#006b55",
+                        "on-tertiary-container": "#00489d",
+                        "tertiary-fixed": "#d8e2ff",
+                        "outline": "#85948d",
+                        "on-primary-fixed": "#002118",
+                        "on-secondary-fixed": "#23005c",
+                        "primary-fixed-dim": "#28dfb5",
+                        "on-surface": "#dce2f7",
+                        "on-secondary-container": "#c4abff",
+                        "surface-container": "#191f2f",
+                        "inverse-surface": "#dce2f7",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface": "#0c1322",
+                        "on-primary": "#00382b",
+                        "surface-container-low": "#141b2b",
+                        "on-secondary": "#3c0091",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#293040",
+                        "surface-tint": "#28dfb5",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#2e3545",
+                        "secondary-container": "#571bc1",
+                        "tertiary": "#c7d7ff",
+                        "on-tertiary-fixed": "#001a42",
+                        "surface-dim": "#0c1322",
+                        "secondary-fixed": "#e9ddff",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-bright": "#323949",
+                        "primary-container": "#00d4aa",
+                        "background": "#0c1322",
+                        "surface-container-lowest": "#070e1d",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "on-primary-container": "#005643",
+                        "on-surface-variant": "#bacac2",
+                        "error-container": "#93000a",
+                        "secondary": "#d0bcff",
+                        "outline-variant": "#3b4a44",
+                        "tertiary-container": "#9cbbff",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-container-highest": "#2e3545",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-background": "#dce2f7",
+                        "primary": "#46f1c5",
+                        "on-tertiary": "#002e6a",
+                        "primary-fixed": "#55fcd0",
+                        "surface-container-high": "#232a3a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "24px",
+                        "lg": "16px",
+                        "sm": "8px",
+                        "xl": "20px",
+                        "md": "12px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "h2": ["Inter"],
+                        "micro": ["Inter"],
+                        "h3": ["Inter"],
+                        "body": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h2": ["17px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "micro": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600" }],
+                        "body": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "h1": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-overlay {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .glow-effect {
+            box-shadow: 0px 4px 12px rgba(0, 212, 170, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background w-[390px] h-[844px] mx-auto relative overflow-hidden font-body shadow-xl border border-surface-variant/30">
+<!-- Background Content (Simulated Dashboard/Appointments List) -->
+<div class="p-md lg:p-lg space-y-md opacity-40 blur-[2px] transition-all duration-300 pointer-events-none select-none h-full">
+<header class="flex justify-between items-center w-full px-lg py-md max-w-7xl mx-auto bg-surface dark:bg-surface text-primary dark:text-primary font-h1 text-h1 docked full-width top-0 flat no shadows text-primary dark:text-primary scale-95 transition-transform">
+<div class="flex items-center gap-sm">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a professional veterinarian or clinic manager in a well-lit, modern clinic setting. Subtle teal and dark navy tones in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDS8Beqog74N38DapaZOzrLmfqz9bqBiwTXg8TqPHh6NKZXFCm29INQ4GZJ9ipeBCjbWbGoesB5orAShST06z2hy20BxfQ0dkuWuRbZ-dBU-2e9uMJBQ_JW2vjqc4hksnmBD-hCjhkY5vDDfFkm57zSuQRQikbiMvDq97XxYamo0vii8tpVXSmDwtFTe7I9ICiazQIDKOrKVM22WG2BwK88HVU2tlBQEhG0s3cK5__pynMFCKb4djUlL3sRVNE6hW8xsUCdyIhTMw"/>
+<span class="font-bold text-primary dark:text-primary">Pet Com Você</span>
+</div>
+<button class="hover:bg-surface-variant/50 dark:hover:bg-surface-variant/50 p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="max-w-7xl mx-auto space-y-lg mt-xl pb-24">
+<h2 class="font-h2 text-h2 px-sm">Agendamentos de Hoje</h2>
+<div class="space-y-md">
+<!-- Dummy Card 1 -->
+<div class="bg-surface-container rounded-lg p-md flex items-center relative overflow-hidden border border-outline-variant">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-secondary-container"></div>
+<div class="flex-1 ml-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-h3">Bella (Golden Retriever)</h3>
+<span class="font-caption text-caption text-on-surface-variant">09:00</span>
+</div>
+<div class="mt-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">pets</span>
+<span class="font-caption text-caption text-on-surface-variant">Consulta</span>
+</div>
+</div>
+</div>
+<!-- Dummy Card 2 (Target of Check-in) -->
+<div class="bg-surface-container rounded-lg p-md flex items-center relative overflow-hidden border border-outline-variant">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-primary-container"></div>
+<div class="flex-1 ml-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-h3">Rex (Bulldog)</h3>
+<span class="font-caption text-caption text-on-surface-variant">10:30</span>
+</div>
+<div class="mt-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">water_drop</span>
+<span class="font-caption text-caption text-on-surface-variant">Banho e Tosa</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Blur Overlay & Dialog Container -->
+<div class="absolute inset-0 z-50 flex items-center justify-center p-lg glass-overlay h-full w-full">
+<!-- Dialog Box -->
+<div class="bg-surface-container-high rounded-xl w-full max-w-sm border border-outline-variant shadow-lg flex flex-col items-center p-xl relative overflow-hidden animate-[scale-in_0.2s_ease-out]">
+<!-- Warning Icon -->
+<div class="w-12 h-12 rounded-full bg-[#ffb4ab]/10 flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined icon-fill text-[#ffb4ab] text-[28px]">warning</span>
+</div>
+<!-- Title -->
+<h2 class="font-h2 text-h2 text-on-surface mb-md text-center">Confirmar Check-in?</h2>
+<!-- Content Container -->
+<div class="bg-surface-container-low rounded-lg p-md w-full mb-lg border border-outline-variant/50">
+<div class="flex items-center gap-md mb-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">pets</span>
+</div>
+<div>
+<p class="font-h3 text-h3 text-on-surface">Rex</p>
+<p class="font-caption text-caption text-on-surface-variant">Banho e Tosa</p>
+</div>
+</div>
+<p class="font-body text-body text-on-surface-variant text-center border-t border-outline-variant/30 pt-sm mt-sm">
+                    O orçamento deve estar aprovado. O status mudará para <span class="font-h3 text-h3 text-primary-container">Em Andamento</span>.
+                </p>
+</div>
+<!-- Action Buttons -->
+<div class="w-full space-y-sm flex flex-col sm:flex-row-reverse sm:space-y-0 sm:gap-md">
+<button class="w-full flex-1 bg-primary text-surface font-h3 text-h3 py-md rounded-lg flex items-center justify-center gap-xs glow-effect hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined icon-fill text-[20px]">check_circle</span>
+                    Confirmar Check-in
+                </button>
+<button class="w-full flex-1 bg-transparent border border-outline-variant text-primary font-h3 text-h3 py-md rounded-lg flex items-center justify-center hover:bg-surface-variant/50 transition-colors">
+                    Cancelar
+                </button>
+</div>
+</div>
+</div>
+<!-- Navigation Shell Suppressed as per rules for transactional/modal intents -->
+<style>
+        @keyframes scale-in {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</body></html>

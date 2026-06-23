@@ -1,0 +1,59 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: petcomvoce_user
+          POSTGRES_PASSWORD: petcomvoce_password
+          POSTGRES_DB: petcomvoce_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Run Unit Tests
+      run: npm run test:unit
+
+    - name: Run E2E Tests
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USERNAME: petcomvoce_user
+        DB_PASSWORD: petcomvoce_password
+        DB_DATABASE: petcomvoce_db
+        NODE_ENV: test
+      run: npm run test:e2e

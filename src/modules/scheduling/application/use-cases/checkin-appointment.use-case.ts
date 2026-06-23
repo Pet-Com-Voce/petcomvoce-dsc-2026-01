@@ -26,7 +26,7 @@ export class CheckinAppointmentUseCase {
     private readonly budgetRepo: Repository<Budget>,
   ) {}
 
-  async execute(appointmentId: string): Promise<Appointment> {
+  async execute(appointmentId: number): Promise<Appointment> {
     const appointment = await this.appointmentRepo.findOne({
       where: { id: appointmentId },
     });

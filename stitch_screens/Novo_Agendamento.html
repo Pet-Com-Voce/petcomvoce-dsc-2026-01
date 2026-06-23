@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pet Com Você - Novo Agendamento</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "inverse-primary": "#006b55",
+                    "on-tertiary-container": "#00489d",
+                    "tertiary-fixed": "#d8e2ff",
+                    "outline": "#85948d",
+                    "on-primary-fixed": "#002118",
+                    "on-secondary-fixed": "#23005c",
+                    "primary-fixed-dim": "#28dfb5",
+                    "on-surface": "#dce2f7",
+                    "on-secondary-container": "#c4abff",
+                    "surface-container": "#191f2f",
+                    "inverse-surface": "#dce2f7",
+                    "on-primary-fixed-variant": "#00513f",
+                    "surface": "#0c1322",
+                    "on-primary": "#00382b",
+                    "surface-container-low": "#141b2b",
+                    "on-secondary": "#3c0091",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#293040",
+                    "surface-tint": "#28dfb5",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#2e3545",
+                    "secondary-container": "#571bc1",
+                    "tertiary": "#c7d7ff",
+                    "on-tertiary-fixed": "#001a42",
+                    "surface-dim": "#0c1322",
+                    "secondary-fixed": "#e9ddff",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "surface-bright": "#323949",
+                    "primary-container": "#00d4aa",
+                    "background": "#0c1322",
+                    "surface-container-lowest": "#070e1d",
+                    "on-tertiary-fixed-variant": "#004395",
+                    "on-primary-container": "#005643",
+                    "on-surface-variant": "#bacac2",
+                    "error-container": "#93000a",
+                    "secondary": "#d0bcff",
+                    "outline-variant": "#3b4a44",
+                    "tertiary-container": "#9cbbff",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "surface-container-highest": "#2e3545",
+                    "tertiary-fixed-dim": "#adc6ff",
+                    "on-background": "#dce2f7",
+                    "primary": "#46f1c5",
+                    "on-tertiary": "#002e6a",
+                    "primary-fixed": "#55fcd0",
+                    "surface-container-high": "#232a3a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xxl": "24px",
+                    "lg": "16px",
+                    "sm": "8px",
+                    "xl": "20px",
+                    "md": "12px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter", "sans-serif"],
+                    "h2": ["Inter", "sans-serif"],
+                    "micro": ["Inter", "sans-serif"],
+                    "h3": ["Inter", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "h1": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h2": ["17px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "micro": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["15px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600"}],
+                    "body": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "h1": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e3545; 
+            border-radius: 4px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-dim text-on-surface font-body text-body antialiased min-h-screen relative overflow-hidden">
+<!-- UNDERLYING SCREEN: Agendamentos -->
+<div class="h-screen flex flex-col pointer-events-none opacity-50 blur-[2px] transition-all duration-300">
+<!-- TopAppBar (JSON) -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary docked full-width top-0 bg-surface dark:bg-surface flat no shadows z-30">
+<div class="flex justify-between items-center w-full px-lg py-md max-w-7xl mx-auto">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A highly detailed professional headshot of a smiling veterinarian wearing a clean teal scrub top, standing in a brightly lit modern clinic with soft bokeh background. Bright, modern light-mode aesthetic, serene yet professional mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClVw_fgzLIlWTDA-1DSfZmETF7IxbVwIC1al1tyb6vPNUkTCwI4M2TaO-rmoSVidKo4VrwFY3Wly5rUs0lRd5Ulsys74EupnsdT2G64cwSfk784T5V_J35RPRIrSH0Luvz1Z1oLtSJuShOqDO0sDEnXxZeYL1Ep0N9oZ5as2-O6XiC5bCMF63_FE0BaPSKcjMkKpqv5OFx_jSWnpH8ifwMYvFUoLsZVr0mdO-Q_CrDA7Qxor_z6XxZcV53xOiKvyRCxgm06e3z-YE"/>
+</div>
+<span class="font-h1 text-h1 font-bold text-primary dark:text-primary tracking-tight">Pet Com Você</span>
+</div>
+<button class="hover:bg-surface-variant/50 dark:hover:bg-surface-variant/50 scale-95 transition-transform p-sm rounded-full text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area (Background) -->
+<main class="flex-1 overflow-y-auto px-lg pt-lg pb-24 max-w-7xl mx-auto w-full">
+<div class="flex justify-between items-end mb-lg">
+<h1 class="font-h2 text-h2 text-on-surface">Agendamentos de Hoje</h1>
+<span class="font-caption text-caption text-on-surface-variant">12 Outubro</span>
+</div>
+<!-- Dummy Appointment Card 1 -->
+<div class="bg-surface-container rounded-lg p-md mb-md border border-outline-variant relative overflow-hidden flex items-center">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-container"></div>
+<div class="flex-1 pl-sm">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-h3 text-h3 text-on-surface">Luna (Golden Retriever)</h3>
+<span class="font-micro text-micro text-on-tertiary-container bg-tertiary-container/20 px-2 py-1 rounded-full border border-tertiary-container/30">Vacina</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 09:00 - 09:30 • Dra. Ana
+                    </p>
+</div>
+</div>
+<!-- Dummy Appointment Card 2 -->
+<div class="bg-surface-container rounded-lg p-md mb-md border border-outline-variant relative overflow-hidden flex items-center">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="flex-1 pl-sm">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-h3 text-h3 text-on-surface">Thor (Bulldog)</h3>
+<span class="font-micro text-micro text-on-primary-container bg-primary-container/20 px-2 py-1 rounded-full border border-primary-container/30">Banho/Tosa</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 10:00 - 11:30 • Carlos
+                    </p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (JSON) -->
+<nav class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md text-primary dark:text-primary docked full-width bottom-0 rounded-t-xl border-t border-outline-variant dark:border-outline-variant shadow-lg fixed bottom-0 left-0 w-full z-20 flex justify-around items-center px-sm pb-safe h-16 md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-caption text-caption">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary border-t-2 border-primary pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1">
+<span class="material-symbols-outlined mb-1 text-primary">calendar_today</span>
+<span class="font-caption text-caption text-primary">Agendamentos</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1">
+<span class="material-symbols-outlined mb-1">pets</span>
+<span class="font-caption text-caption">Pets</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1">
+<span class="material-symbols-outlined mb-1">badge</span>
+<span class="font-caption text-caption">Funcionários</span>
+</button>
+</nav>
+</div>
+<!-- OVERLAY -->
+<div class="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"></div>
+<!-- BOTTOM SHEET -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container rounded-t-xl z-50 flex flex-col max-h-[795px] shadow-[0_-8px_32px_rgba(0,0,0,0.5)] border-t border-outline-variant/30 md:max-w-2xl md:mx-auto md:left-1/2 md:-translate-x-1/2 animate-[slideUp_0.3s_ease-out]">
+<!-- Handlebar -->
+<div class="w-full flex justify-center pt-md pb-xs">
+<div class="w-8 h-1 bg-outline-variant/50 rounded-full"></div>
+</div>
+<!-- Header -->
+<div class="px-lg pb-md flex justify-between items-center border-b border-surface-container-highest">
+<h2 class="font-h2 text-h2 text-on-surface">Novo Agendamento</h2>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-sm -mr-sm rounded-full hover:bg-surface-variant/30">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Scrollable Form Area -->
+<div class="overflow-y-auto p-lg space-y-lg flex-1">
+<!-- Pet Search/Select -->
+<div class="space-y-sm">
+<label class="font-caption text-caption text-on-surface-variant block">Pet</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-md pl-10 pr-md text-on-surface font-body text-body focus:border-primary-container focus:ring-1 focus:ring-primary-container placeholder:text-on-surface-variant/50 transition-colors" placeholder="Selecione o pet..." type="text"/>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Funcionário Select -->
+<div class="space-y-sm">
+<label class="font-caption text-caption text-on-surface-variant block">Funcionário Responsável</label>
+<div class="relative">
+<select class="appearance-none w-full bg-surface-container-low border border-outline-variant rounded-lg py-md pl-md pr-10 text-on-surface font-body text-body focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors">
+<option class="text-on-surface-variant/50" disabled="" selected="" value="">Selecione o profissional...</option>
+<option value="1">Dra. Ana Rosa (Veterinária)</option>
+<option value="2">Carlos Silva (Banho/Tosa)</option>
+<option value="3">Mariana Costa (Recepção)</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Tipo de Serviço (Segmented Control / Chips) -->
+<div class="space-y-sm">
+<label class="font-caption text-caption text-on-surface-variant block">Tipo de Serviço</label>
+<div class="flex flex-wrap gap-sm">
+<!-- Inactive -->
+<button class="px-md py-sm rounded-full border border-outline-variant bg-transparent text-on-surface-variant font-caption text-caption hover:bg-surface-variant transition-colors">
+                        HOTEL
+                    </button>
+<!-- Inactive -->
+<button class="px-md py-sm rounded-full border border-outline-variant bg-transparent text-on-surface-variant font-caption text-caption hover:bg-surface-variant transition-colors">
+                        CONSULTA
+                    </button>
+<!-- Active (Primary Teal style for selection) -->
+<button class="px-md py-sm rounded-full border border-primary-container bg-primary-container/10 text-primary-container font-caption text-caption flex items-center gap-xs ring-1 ring-primary-container/50">
+<span class="material-symbols-outlined text-[14px]">check</span> BANHO_TOSA
+                    </button>
+<!-- Inactive -->
+<button class="px-md py-sm rounded-full border border-outline-variant bg-transparent text-on-surface-variant font-caption text-caption hover:bg-surface-variant transition-colors">
+                        VACINA
+                    </button>
+</div>
+</div>
+<!-- Data e Hora -->
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-sm">
+<label class="font-caption text-caption text-on-surface-variant block">Data</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-md px-md text-on-surface font-body text-body focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors [color-scheme:dark]" type="date"/>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-caption text-caption text-on-surface-variant block">Hora</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-md px-md text-on-surface font-body text-body focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors [color-scheme:dark]" type="time"/>
+</div>
+</div>
+</div>
+<!-- Duração -->
+<div class="space-y-sm">
+<label class="font-caption text-caption text-on-surface-variant block">Duração (Minutos)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-md px-md text-on-surface font-body text-body focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" min="15" step="15" type="number" value="60"/>
+<span class="absolute right-md top-1/2 -translate-y-1/2 font-caption text-caption text-on-surface-variant pointer-events-none">min</span>
+</div>
+</div>
+<!-- Observações -->
+<div class="space-y-sm">
+<label class="font-caption text-caption text-on-surface-variant block">Observações (Opcional)</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-md px-md text-on-surface font-body text-body focus:border-primary-container focus:ring-1 focus:ring-primary-container placeholder:text-on-surface-variant/50 transition-colors resize-none" placeholder="Adicione notas sobre o comportamento do pet, produtos específicos, etc." rows="3"></textarea>
+</div>
+<!-- Bottom padding to ensure content isn't hidden behind sticky footer -->
+<div class="h-4"></div>
+</div>
+<!-- Sticky Footer -->
+<div class="p-lg bg-surface-container border-t border-surface-container-highest flex gap-md pb-safe">
+<button class="flex-1 bg-transparent text-primary-container border border-outline-variant font-h3 text-h3 py-md px-lg rounded-lg hover:bg-surface-variant transition-colors flex items-center justify-center">
+                Cancelar
+            </button>
+<button class="flex-[2] bg-primary-container text-on-primary-container font-h3 text-h3 py-md px-lg rounded-lg hover:bg-primary-fixed hover:shadow-[0_4px_12px_rgba(0,212,170,0.3)] transition-all flex items-center justify-center gap-xs">
+                Criar Agendamento
+            </button>
+</div>
+</div>
+<style>
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body></html>

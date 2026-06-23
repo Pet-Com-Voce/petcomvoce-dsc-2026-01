@@ -29,7 +29,7 @@ describe('CreateAppointmentUseCase', () => {
     };
 
     appointmentRepository.findConflicts.mockResolvedValue([]);
-    appointmentRepository.save.mockResolvedValue({ id: 'app-uuid', ...input });
+    appointmentRepository.save.mockResolvedValue({ id: 1, ...input });
 
     const result = await useCase.execute(input);
 

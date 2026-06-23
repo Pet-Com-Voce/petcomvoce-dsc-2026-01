@@ -6,21 +6,21 @@
 -- 1. Tutor (tabela mínima, apenas id)
 -- ---------------------------------------------------------------
 INSERT INTO tutors (id)
-VALUES ('aaaaaaaa-0000-0000-0000-000000000001')
+VALUES (1)
 ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------------
 -- 2. Pet vinculado ao Tutor
 -- ---------------------------------------------------------------
 INSERT INTO pets (id)
-VALUES ('bbbbbbbb-0000-0000-0000-000000000002')
+VALUES (2)
 ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------------
 -- 3. Funcionário (veterinário responsável)
 -- ---------------------------------------------------------------
 INSERT INTO employees (id)
-VALUES ('cccccccc-0000-0000-0000-000000000003')
+VALUES (3)
 ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------------
@@ -28,13 +28,13 @@ ON CONFLICT (id) DO NOTHING;
 -- ---------------------------------------------------------------
 INSERT INTO appointments (id, "dataHora", duracao, tipo, status, "petId", "funcionarioId", observacoes, "createdAt", "updatedAt")
 VALUES (
-  'dddddddd-0000-0000-0000-000000000004',
+  1,
   NOW() + INTERVAL '1 hour',
   30,
   'CONSULTA',
   'CONFIRMADO',
-  'bbbbbbbb-0000-0000-0000-000000000002',
-  'cccccccc-0000-0000-0000-000000000003',
+  2,
+  3,
   'Consulta de rotina',
   NOW(),
   NOW()
@@ -43,9 +43,9 @@ ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO budgets (id, "appointmentId", valor, status, "createdAt", "updatedAt")
 VALUES (
-  'eeeeeeee-0000-0000-0000-000000000005',
-  'dddddddd-0000-0000-0000-000000000004',
-  150.00,
+  1,
+  1,
+  15000, -- valor em centavos
   'APROVADO',
   NOW(),
   NOW()
@@ -57,13 +57,13 @@ ON CONFLICT (id) DO NOTHING;
 -- ---------------------------------------------------------------
 INSERT INTO appointments (id, "dataHora", duracao, tipo, status, "petId", "funcionarioId", observacoes, "createdAt", "updatedAt")
 VALUES (
-  'ffffffff-0000-0000-0000-000000000006',
+  2,
   NOW() + INTERVAL '2 hours',
   30,
   'BANHO_TOSA',
   'CONFIRMADO',
-  'bbbbbbbb-0000-0000-0000-000000000002',
-  'cccccccc-0000-0000-0000-000000000003',
+  2,
+  3,
   'Banho e tosa',
   NOW(),
   NOW()
@@ -72,9 +72,9 @@ ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO budgets (id, "appointmentId", valor, status, "createdAt", "updatedAt")
 VALUES (
-  'a0000000-0000-0000-0000-000000000007',
-  'ffffffff-0000-0000-0000-000000000006',
-  80.00,
+  2,
+  2,
+  8000, -- valor em centavos
   'PENDENTE',
   NOW(),
   NOW()
@@ -86,15 +86,24 @@ ON CONFLICT (id) DO NOTHING;
 -- ---------------------------------------------------------------
 INSERT INTO appointments (id, "dataHora", duracao, tipo, status, "petId", "funcionarioId", observacoes, "createdAt", "updatedAt")
 VALUES (
-  'b0000000-0000-0000-0000-000000000008',
+  3,
   NOW() - INTERVAL '1 day',
   30,
   'CONSULTA',
   'CANCELADO',
-  'bbbbbbbb-0000-0000-0000-000000000002',
-  'cccccccc-0000-0000-0000-000000000003',
+  2,
+  3,
   NULL,
   NOW(),
   NOW()
 )
 ON CONFLICT (id) DO NOTHING;
+
+-- ---------------------------------------------------------------
+-- 7. Reset sequences to prevent conflicts with manually inserted IDs
+-- ---------------------------------------------------------------
+SELECT setval(pg_get_serial_sequence('tutors', 'id'), COALESCE((SELECT MAX(id) FROM tutors), 1));
+SELECT setval(pg_get_serial_sequence('pets', 'id'), COALESCE((SELECT MAX(id) FROM pets), 1));
+SELECT setval(pg_get_serial_sequence('employees', 'id'), COALESCE((SELECT MAX(id) FROM employees), 1));
+SELECT setval(pg_get_serial_sequence('appointments', 'id'), COALESCE((SELECT MAX(id) FROM appointments), 1));
+SELECT setval(pg_get_serial_sequence('budgets', 'id'), COALESCE((SELECT MAX(id) FROM budgets), 1));

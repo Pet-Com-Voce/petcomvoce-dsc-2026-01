@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pets - Pet Com Você</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "inverse-primary": "#006b55",
+                        "on-tertiary-container": "#00489d",
+                        "tertiary-fixed": "#d8e2ff",
+                        "outline": "#85948d",
+                        "on-primary-fixed": "#002118",
+                        "on-secondary-fixed": "#23005c",
+                        "primary-fixed-dim": "#28dfb5",
+                        "on-surface": "#dce2f7",
+                        "on-secondary-container": "#c4abff",
+                        "surface-container": "#191f2f",
+                        "inverse-surface": "#dce2f7",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface": "#0c1322",
+                        "on-primary": "#00382b",
+                        "surface-container-low": "#141b2b",
+                        "on-secondary": "#3c0091",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#293040",
+                        "surface-tint": "#28dfb5",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#2e3545",
+                        "secondary-container": "#571bc1",
+                        "tertiary": "#c7d7ff",
+                        "on-tertiary-fixed": "#001a42",
+                        "surface-dim": "#0c1322",
+                        "secondary-fixed": "#e9ddff",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-bright": "#323949",
+                        "primary-container": "#00d4aa",
+                        "background": "#0c1322",
+                        "surface-container-lowest": "#070e1d",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "on-primary-container": "#005643",
+                        "on-surface-variant": "#bacac2",
+                        "error-container": "#93000a",
+                        "secondary": "#d0bcff",
+                        "outline-variant": "#3b4a44",
+                        "tertiary-container": "#9cbbff",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-container-highest": "#2e3545",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-background": "#dce2f7",
+                        "primary": "#46f1c5",
+                        "on-tertiary": "#002e6a",
+                        "primary-fixed": "#55fcd0",
+                        "surface-container-high": "#232a3a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "24px",
+                        "lg": "16px",
+                        "sm": "8px",
+                        "xl": "20px",
+                        "md": "12px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "h2": ["Inter"],
+                        "micro": ["Inter"],
+                        "h3": ["Inter"],
+                        "body": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "h2": ["17px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "micro": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["15px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "body": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "h1": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(133, 148, 141, 0.2);
+        }
+        .glow-active {
+            box-shadow: 0px 4px 12px rgba(0, 212, 170, 0.2);
+        }
+        
+        body {
+            background-color: #0A0E1A; /* Level 0 Surface */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary docked full-width top-0 bg-surface dark:bg-surface flat no shadows z-40 sticky">
+<div class="flex justify-between items-center w-full px-lg py-md max-w-7xl mx-auto">
+<div class="flex items-center gap-md">
+<img alt="User Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a veterinarian in a modern, dark-themed clinical setting, illuminated by subtle cool blue and teal lighting. They look confident and welcoming, suitable for a high-end corporate B2B app avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWiAw2f6Y5pse2W_Oq2XME1NuNYi6xDHHeHh-YNE0cDzmp2rYZ7RRlIlAxbtDYQ2S5Zy6AfjZV4DwOUJMKaPin3FaDDdgISUHLqAgp07TsnscOFcyPJbEKADTBDfNng9mWT2O4N8J3uj1oYx-WIo38g8SjjJFkDop57MqfWMaeFHmUTU-koPk6ck_A8BWpUPBaUItrh_Cip94OA-F6-8NSHLp7PKrwaIKH4HV9NPNprCXWYAueoTb6HXUdxhY7sxGXcs_pkXLEZxc"/>
+<h1 class="font-h1 text-h1 font-bold text-primary dark:text-primary tracking-tight">Pet Com Você</h1>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-lg py-xl pb-24 space-y-xl">
+<!-- Page Title & Actions -->
+<div class="flex justify-between items-center">
+<h2 class="font-h2 text-h2 text-on-background">Pets</h2>
+<button class="bg-primary text-on-primary font-body px-md py-sm rounded-lg flex items-center gap-xs glow-active hover:bg-primary-container transition-all scale-95 hover:scale-100">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                Novo Pet
+            </button>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="search">search</span>
+</div>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-md pl-10 pr-md text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body" placeholder="Buscar nome ou tutor..." type="text"/>
+</div>
+<!-- Pets Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Card 1: Rex -->
+<div class="glass-card rounded-xl p-md flex flex-col gap-md transition-transform hover:-translate-y-1 duration-200">
+<div class="flex items-center gap-md">
+<img alt="Rex" class="w-16 h-16 rounded-lg object-cover border border-outline-variant" data-alt="A high-quality, professional photo of a happy Golden Retriever dog looking directly at the camera, set against a dark, moody background with subtle studio lighting highlighting its golden fur. Suitable for a modern veterinary app profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANCslkO0TE6TAIuJTngB1aNRpy7GVPnacT-A0ox3qlW1qKx4j3RZjKMZ0LL0ZVdJ6NoAzzMcqVbeEgC6L-ISfgzd2Sx6GmpBlukwJnmztxeOLVm0SCP2dA7x7RS-OMVPlZaakPNZZbBYxiROR1y2Mg-QksehBNRomPKA-EGiaA5B_bXFONZFVJViWXEXoOKYEavC1gFqBFn2y4mRN5DWnjcZyRixcbJ7JIAOi2MLArd0Dk-lOVaUVP8xbTjWAwFN0MWQllcibd2e8"/>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-h3 text-on-surface">Rex</h3>
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="pets">pets</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Golden Retriever</p>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-xs mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span> Tutor: Carlos S.
+                        </p>
+</div>
+</div>
+<div class="flex justify-between items-center mt-sm pt-md border-t border-outline-variant/30">
+<div class="flex gap-xs">
+<span class="bg-surface-variant text-on-surface-variant px-sm py-1 rounded-full font-micro text-micro flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> Vacinas OK
+                        </span>
+</div>
+<button class="text-primary font-body text-sm flex items-center gap-xs hover:text-primary-container transition-colors">
+                        Ver prontuário <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Mel -->
+<div class="glass-card rounded-xl p-md flex flex-col gap-md transition-transform hover:-translate-y-1 duration-200">
+<div class="flex items-center gap-md">
+<img alt="Mel" class="w-16 h-16 rounded-lg object-cover border border-outline-variant" data-alt="A striking portrait of a fluffy Persian cat with piercing eyes, captured in a dark studio setting with cool, cinematic rim lighting that emphasizes its luxurious coat. Perfect for a premium pet management platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBPCoLn5fZF29lrs4HO0pK4CZEVRBR1RC9C1u3eyXHyp6WWv2VCmC_BLksUpda17yDlD-XTQ8x2WQJHFx4mums75byEd6irDHq2pJpZ58Qa53lA8mNy4d0Uc4D9zSeZyWIvrJsRUG0_N5fCF0h493luIQvw9LiIV1o84p_ZJhPsNtn12iW500tQAD-3bQuJyhQEDOC8jCiGOxhRIAxBG3eyPepwxel-fSagrM__AB5_H-WyjvRO2CRDO0oms1A8Gun5rYyhQwefxs"/>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-h3 text-on-surface">Mel</h3>
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="cruelty_free">cruelty_free</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Persa</p>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-xs mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span> Tutora: Ana M.
+                        </p>
+</div>
+</div>
+<div class="flex justify-between items-center mt-sm pt-md border-t border-outline-variant/30">
+<div class="flex gap-xs">
+<span class="bg-surface-variant text-on-surface-variant px-sm py-1 rounded-full font-micro text-micro flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> Retorno 12/05
+                        </span>
+</div>
+<button class="text-primary font-body text-sm flex items-center gap-xs hover:text-primary-container transition-colors">
+                        Ver prontuário <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Bento -->
+<div class="glass-card rounded-xl p-md flex flex-col gap-md transition-transform hover:-translate-y-1 duration-200">
+<div class="flex items-center gap-md">
+<img alt="Bento" class="w-16 h-16 rounded-lg object-cover border border-outline-variant" data-alt="A focused, high-contrast image of a French Bulldog puppy sitting attentively. The lighting is modern and dramatic, casting soft shadows against a deep navy blue background, fitting a professional dark-mode B2B application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDySqwt7u1ZbCFvZxF481qe3wiI80hsJfw3ATuaw0JwLOBBxENF7ZFApgh4jW-WXDNTLFCZlBJu04cfTTWfOeoBdrubYFEtph2yvevE7fcB2IANuZ0eRsPC8VDeExKObVQwNB0CK2B2ZA1kNcKUlkcF7aQ9-cUEmjP01UTekfMeGWN599B7PxOVvbG9sPAke3ls4ygp7bl6xAvyR2mfQdHSNXXSO5xgw0mJ79iyqHhMjmjjxWOeKkFRh-4KZcadMayENwSRxhcFkuk"/>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-h3 text-on-surface">Bento</h3>
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="pets">pets</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Bulldog Francês</p>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-xs mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span> Tutor: Roberto F.
+                        </p>
+</div>
+</div>
+<div class="flex justify-between items-center mt-sm pt-md border-t border-outline-variant/30">
+<div class="flex gap-xs">
+<span class="bg-surface-variant text-on-surface-variant px-sm py-1 rounded-full font-micro text-micro flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error"></span> Alergia severa
+                        </span>
+</div>
+<button class="text-primary font-body text-sm flex items-center gap-xs hover:text-primary-container transition-colors">
+                        Ver prontuário <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden bg-surface/80 dark:bg-surface/80 backdrop-blur-md text-primary dark:text-primary font-caption text-caption text-primary docked full-width bottom-0 rounded-t-xl border-t border-outline-variant dark:border-outline-variant shadow-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-safe h-16">
+<!-- Dashboard (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1 h-full" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Agendamentos (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1 h-full" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="calendar_today">calendar_today</span>
+<span>Agendamentos</span>
+</a>
+<!-- Pets (Active) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary border-t-2 border-primary pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1 h-full" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="pets" data-weight="fill" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="font-bold">Pets</span>
+</a>
+<!-- Funcionários (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all flex-1 h-full" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="badge">badge</span>
+<span>Funcionários</span>
+</a>
+</nav>
+</body></html>

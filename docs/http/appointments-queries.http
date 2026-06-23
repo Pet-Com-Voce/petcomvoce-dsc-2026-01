@@ -1,0 +1,131 @@
+### ============================================================
+### Consulta de Agendamentos (Listagem e Busca por ID)
+### GET /appointments e GET /appointments/:id
+###
+### Pré-requisito: execute o seed em docs/seeds/uc05-checkin.sql
+### ============================================================
+
+@baseUrl = http://localhost:3000
+
+
+### ---------------------------------------------------------------
+### [SUCESSO 201] Criar novo agendamento
+### Cria um agendamento com ID sequencial, petId=2 e funcionarioId=3
+### ---------------------------------------------------------------
+POST {{baseUrl}}/appointments
+Content-Type: application/json
+
+{
+  "petId": 2,
+  "funcionarioId": 3,
+  "tipo": "CONSULTA",
+  "dataHora": "2026-05-28T14:30:00Z",
+  "duracao": 30,
+  "observacoes": "Agendamento teste com IDs sequenciais 2 e 3"
+}
+
+
+### ---------------------------------------------------------------
+### [SUCESSO 200] Listar todos os agendamentos cadastrados
+### Retorna a lista completa com relações ordenada cronologicamente
+### ---------------------------------------------------------------
+GET {{baseUrl}}/appointments
+
+
+### ---------------------------------------------------------------
+### [SUCESSO 200] Consulta de agendamento existente por ID
+### Retorna os dados completos do agendamento, incluindo relações
+### ---------------------------------------------------------------
+GET {{baseUrl}}/appointments/1
+
+
+### ---------------------------------------------------------------
+### [ERRO 404] Agendamento não encontrado (inexistente)
+### Retorna 404 Not Found com mensagem amigável
+### ---------------------------------------------------------------
+GET {{baseUrl}}/appointments/999
+
+
+### ============================================================
+### Atualização de Agendamentos (Safe PATCH)
+### PATCH /appointments/:id
+### ============================================================
+
+### ---------------------------------------------------------------
+### [SUCESSO 200] UPDATE 1 — Caminho Feliz
+### Atualiza campos permitidos de um agendamento existente
+### ---------------------------------------------------------------
+PATCH {{baseUrl}}/appointments/1
+Content-Type: application/json
+
+{
+  "observacoes": "Agendamento atualizado com sucesso",
+  "duracao": 45
+}
+
+
+### ---------------------------------------------------------------
+### UPDATE 2 — Confirmar pela Leitura
+### Consulta para garantir que as alterações foram de fato persistidas
+### ---------------------------------------------------------------
+GET {{baseUrl}}/appointments/1
+
+
+### ---------------------------------------------------------------
+### [ERRO 404] UPDATE 3 — Registro Inexistente
+### Tenta atualizar agendamento que não existe
+### ---------------------------------------------------------------
+PATCH {{baseUrl}}/appointments/999
+Content-Type: application/json
+
+{
+  "observacoes": "Agendamento inexistente"
+}
+
+
+### ---------------------------------------------------------------
+### [SUCESSO 200] UPDATE 4 — Payload Parcial
+### Altera apenas um campo (ex: observacoes) sem afetar os outros
+### ---------------------------------------------------------------
+PATCH {{baseUrl}}/appointments/1
+Content-Type: application/json
+
+{
+  "observacoes": "Apenas observações alteradas novamente"
+}
+
+
+### ---------------------------------------------------------------
+### [SUCESSO 200] UPDATE 5 — Payload Vazio
+### Retorna o registro sem fazer alterações adicionais
+### ---------------------------------------------------------------
+PATCH {{baseUrl}}/appointments/1
+Content-Type: application/json
+
+{}
+
+
+### ============================================================
+### Exclusão de Agendamentos (Safe Soft DELETE)
+### DELETE /appointments/:id
+### ============================================================
+
+### ---------------------------------------------------------------
+### [SUCESSO 204] DELETE 1 — Caminho Feliz
+### Deleta com sucesso um agendamento existente (Soft Delete)
+### ---------------------------------------------------------------
+DELETE {{baseUrl}}/appointments/1
+
+
+### ---------------------------------------------------------------
+### [ERRO 404] DELETE 2 — Confirmar por Leitura
+### Tenta buscar o agendamento deletado, que deve retornar 404
+### ---------------------------------------------------------------
+GET {{baseUrl}}/appointments/1
+
+
+### ---------------------------------------------------------------
+### [ERRO 404] DELETE 3 — Registro Inexistente
+### Tenta deletar um agendamento que não existe
+### ---------------------------------------------------------------
+DELETE {{baseUrl}}/appointments/999

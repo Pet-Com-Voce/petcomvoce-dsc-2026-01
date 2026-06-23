@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Pet Com Você</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#323949",
+                        "on-secondary-fixed": "#23005c",
+                        "on-tertiary-fixed": "#001a42",
+                        "on-surface": "#dce2f7",
+                        "tertiary-fixed": "#d8e2ff",
+                        "on-tertiary-container": "#00489d",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "surface": "#0c1322",
+                        "on-primary-fixed": "#002118",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "on-tertiary": "#002e6a",
+                        "surface-container-high": "#232a3a",
+                        "primary": "#46f1c5",
+                        "primary-container": "#00d4aa",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dce2f7",
+                        "on-secondary": "#3c0091",
+                        "surface-tint": "#28dfb5",
+                        "secondary-fixed": "#e9ddff",
+                        "secondary": "#d0bcff",
+                        "surface-container-lowest": "#070e1d",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#141b2b",
+                        "on-surface-variant": "#bacac2",
+                        "tertiary": "#c7d7ff",
+                        "secondary-container": "#571bc1",
+                        "on-secondary-container": "#c4abff",
+                        "background": "#0c1322",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "primary-fixed": "#55fcd0",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface-variant": "#2e3545",
+                        "inverse-on-surface": "#293040",
+                        "primary-fixed-dim": "#28dfb5",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#191f2f",
+                        "inverse-primary": "#006b55",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "outline-variant": "#3b4a44",
+                        "on-primary-container": "#005643",
+                        "surface-container-highest": "#2e3545",
+                        "tertiary-container": "#9cbbff",
+                        "outline": "#85948d",
+                        "on-background": "#dce2f7",
+                        "surface-dim": "#0c1322",
+                        "on-primary": "#00382b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "8px",
+                        "lg": "16px",
+                        "md": "12px",
+                        "xxl": "24px",
+                        "xl": "20px"
+                    },
+                    "fontFamily": {
+                        "body": ["Inter"],
+                        "micro": ["Inter"],
+                        "caption": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "micro": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h3": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600" }],
+                        "h2": ["17px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "h1": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(26, 34, 53, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(133, 148, 141, 0.2);
+        }
+        .glow-btn {
+            box-shadow: 0px 4px 12px rgba(0, 212, 170, 0.2);
+        }
+        .input-field {
+            background: #111827;
+            border: 1px solid rgba(133, 148, 141, 0.3);
+            color: #dce2f7;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #46f1c5;
+            box-shadow: 0 0 0 1px #46f1c5;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col items-center justify-center p-lg antialiased relative overflow-hidden" style="width: 390px; height: 844px; margin: 0 auto; position: relative;">
+<!-- Subtle Background Elements -->
+<div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary-container rounded-full mix-blend-screen filter blur-[120px] opacity-10 pointer-events-none"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-secondary-container rounded-full mix-blend-screen filter blur-[120px] opacity-10 pointer-events-none"></div>
+<main class="w-full max-w-md relative z-10">
+<!-- Logo Area -->
+<div class="flex flex-col items-center mb-xxl">
+<div class="w-16 h-16 bg-surface-container-highest rounded-2xl flex items-center justify-center mb-lg border border-outline-variant shadow-lg relative overflow-hidden">
+<!-- Subtle gradient overlay for logo background -->
+<div class="absolute inset-0 bg-gradient-to-tr from-surface-container-highest to-surface-bright opacity-50"></div>
+<span class="material-symbols-outlined text-[32px] text-primary relative z-10" data-icon="pets" data-weight="fill" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface mb-xs tracking-tight">Pet Com Você</h1>
+<p class="font-body text-body text-on-surface-variant text-center px-lg">Gestão Profissional para Clínicas Veterinárias</p>
+</div>
+<!-- Login Form Panel -->
+<div class="glass-panel rounded-xl p-xl shadow-2xl relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-30 rounded-t-xl"></div>
+<form action="#" class="space-y-lg" method="POST">
+<div>
+<label class="block font-caption text-caption text-on-surface-variant mb-xs ml-xs" for="email">E-mail Corporativo</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="mail">mail</span>
+</div>
+<input class="input-field block w-full pl-10 pr-md py-md rounded-lg font-body text-body transition-colors" id="email" name="email" placeholder="contato@clinica.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-caption text-caption text-on-surface-variant mb-xs ml-xs" for="password">Senha</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="lock">lock</span>
+</div>
+<input class="input-field block w-full pl-10 pr-md py-md rounded-lg font-body text-body transition-colors" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-md flex items-center text-on-surface-variant hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-end">
+<button class="font-caption text-caption text-primary hover:text-primary-fixed transition-colors focus:outline-none focus:underline" type="button">
+                        Esqueci minha senha
+                    </button>
+</div>
+<button class="w-full bg-primary-container hover:bg-primary-fixed text-surface-container-lowest font-h3 text-h3 py-md rounded-lg transition-all glow-btn active:scale-95 flex items-center justify-center space-x-sm group mt-xl" type="submit">
+<span class="">Entrar</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<div class="mt-lg text-center border-t border-outline-variant pt-lg">
+<button class="font-body text-body text-on-surface hover:text-primary transition-colors focus:outline-none" type="button">
+                    Solicitar acesso para minha clínica
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="absolute bottom-md w-full text-center">
+<p class="font-micro text-micro text-outline">Pet Com Você v2.4.1 • Ambiente Seguro</p>
+</footer>
+</body></html>

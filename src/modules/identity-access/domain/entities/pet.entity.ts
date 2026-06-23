@@ -1,7 +1,16 @@
-import { Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity("pets")
 export class Pet {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ default: 'Pet Sem Nome' })
+  nome: string;
+
+  @Column({ default: 'Cachorro' })
+  especie: string;
+
+  @Column({ default: 'SRD' })
+  raca: string;
 }

@@ -1,161 +1,249 @@
-# Pet Com Você
+# 🐾 Pet Com Você
 
-![Status: Em Desenvolvimento](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
-![Node](https://img.shields.io/badge/Node.js-18%2B-green)
-![NestJS](https://img.shields.io/badge/NestJS-10.x-red)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue)
-
-Sistema integrado de gestão para pet shops e clínicas veterinárias. Centraliza agendamento, prontuário clínico, estoque, PDV, financeiro e notificações automáticas via WhatsApp em uma única plataforma.
+> Plataforma integrada de gestão para **pet shops** e **clínicas veterinárias** — agendamentos, prontuários médicos, vacinação e controle de acesso em um único lugar.
 
 ---
 
-## Stack Tecnológica
+## 📋 Índice
 
-| Camada | Tecnologia |
+- [Visão Geral](#-visão-geral)
+- [Tecnologias](#-tecnologias)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Pré-requisitos](#-pré-requisitos)
+- [Variáveis de Ambiente](#️-variáveis-de-ambiente)
+- [Como Rodar](#-como-rodar)
+  - [Com Docker (recomendado)](#-com-docker-recomendado)
+  - [Backend (manual)](#-backend-manual)
+  - [Frontend (manual)](#-frontend-manual)
+- [Testes](#-testes)
+- [URLs Úteis](#-urls-úteis)
+
+---
+
+## 🧭 Visão Geral
+
+O **Pet Com Você** é uma API REST construída com **NestJS** e um frontend **React + Vite**, cobrindo três módulos principais:
+
+| Módulo | Descrição |
 |---|---|
-| Backend | NestJS (Node.js + TypeScript) |
-| Frontend Web | React.js |
-| App Móvel | React Native |
-| Banco de Dados | PostgreSQL via Supabase |
-| Notificações | WhatsApp Business API |
-| Comunicação assíncrona interna | EventEmitter2 (NestJS) |
+| 🔑 **Identidade & Acesso** | Cadastro de tutores, pets e funcionários |
+| 📅 **Agendamentos** | Criação, consulta, check-in e cancelamento de atendimentos |
+| 🏥 **Clínico** | Prontuários médicos e registro de vacinas |
 
-**Arquitetura:** Monólito Modular — um único processo deployável com cinco módulos de contexto delimitado.
+Todos os endpoints da API retornam respostas padronizadas no formato `{ data, meta }`.
 
 ---
 
-## Usuários do Sistema
+## 🛠 Tecnologias
 
-| Ator | Papel |
-|---|---|
-| Administrador / Recepcionista | Entrada operacional: agenda, cadastros, PDV, financeiro |
-| Veterinário | Registra prontuários, prescrições, vacinas e insumos |
-| Tutor | Aprova orçamentos, acompanha saúde do pet via app |
-| Sistema | Jobs agendados: notificações preditivas, alertas de estoque |
+### Backend
+- **Runtime:** Node.js 20
+- **Framework:** NestJS 11
+- **Banco de dados:** PostgreSQL 16 + TypeORM
+- **Documentação:** Swagger / OpenAPI (`/api/docs`)
+- **Segurança:** Helmet, throttling, validação com `class-validator`
+- **Linguagem:** TypeScript
 
----
+### Frontend
+- **Framework:** React 18
+- **Build tool:** Vite 4
+- **Linguagem:** TypeScript
 
-## Base de Conhecimento
-
-| Arquivo | Conteúdo |
-|---|---|
-| [`docs/domain.md`](./docs/domain.md) | Entidades, atributos, relacionamentos, agregados e regras de negócio |
-| [`docs/flows.md`](./docs/flows.md) | Fluxo principal (consulta veterinária) e fluxos secundários |
-| [`docs/api.md`](./docs/api.md) | Contratos de API — entrada, processamento e saída de cada operação |
-| [`docs/architecture.md`](./docs/architecture.md) | Módulos, fronteiras, padrões de comunicação, decisões técnicas e roadmap |
-| [`docs/AGENTS.md`](./docs/AGENTS.md) | Referência rápida de convenções, padrões e restrições para agentes desenvolvedores |
-| [`docs/reference/`](./docs/reference/) | PDFs originais do trabalho acadêmico (fonte primária) |
+### Infraestrutura
+- **Containers:** Docker + Docker Compose
+- **Testes:** Jest (unitários e e2e com Supertest)
 
 ---
 
-## Módulos Internos
+## 📁 Estrutura do Projeto
 
-| Módulo | Responsabilidade |
-|---|---|
-| `IdentidadeAcesso` | Autenticação, cadastro de tutores e funcionários, roles/permissões |
-| `Clinico` | Prontuários, vacinas, insumos clínicos |
-| `AgendamentoServicos` | Agenda, fila de espera, banho, tosa, hotelzinho |
-| `EstoquePDV` | Catálogo de produtos, estoque, vendas no PDV, baixa automática |
-| `FinanceiroNotificacoes` | Pagamentos, orçamentos, fluxo de caixa, WhatsApp preditivo |
-
----
-
-## Contexto do Problema
-
-Pet shops e clínicas veterinárias de pequeno e médio porte operam com sistemas isolados ou papel. Isso causa:
-- Perda de histórico médico entre atendimentos
-- Falhas de comunicação entre equipes (recepção ↔ veterinário ↔ grooming)
-- Ausência de visão 360° da jornada do animal
-- Recompra não rastreada (tutores esquecem de repor ração e vacinas)
-
-**Solução:** centralizar toda a jornada do animal em um único sistema — do cadastro ao pagamento, do prontuário ao lembrete automatizado.
-
----
-
-## Pré-requisitos
-
-Antes de iniciar, você precisará ter instalado em sua máquina:
-- [Node.js](https://nodejs.org/) (versão 18 ou superior recomendada)
-- [Docker](https://www.docker.com/) e Docker Compose (para rodar o banco de dados local)
-- [Git](https://git-scm.com/)
-
----
-
-## Como executar o projeto localmente
-
-Siga as instruções abaixo para clonar, instalar dependências e rodar o projeto.
-
-### 1. Clonar o repositório
-```bash
-git clone https://github.com/seu-usuario/pet-com-voce.git
-cd pet-com-voce
+```
+petcomvoce-dsc-2026-01/
+├── src/                        # Código-fonte do backend (NestJS)
+│   ├── main.ts                 # Entrypoint da aplicação
+│   ├── app.module.ts           # Módulo raiz
+│   ├── common/                 # Filtros, interceptors e utilitários globais
+│   └── modules/
+│       ├── identity-access/    # Tutores, pets e funcionários
+│       ├── scheduling/         # Agendamentos
+│       └── clinical/           # Prontuários e vacinas
+├── frontend/                   # Código-fonte do frontend (React + Vite)
+│   └── src/
+│       ├── pages/              # Páginas da aplicação
+│       ├── components/         # Componentes reutilizáveis
+│       ├── api.ts              # Camada de comunicação com a API
+│       └── types.ts            # Tipagens compartilhadas
+├── test/                       # Testes e2e
+├── Dockerfile                  # Build multi-stage do backend
+├── docker-compose.yml          # Orquestração de serviços (DB + App)
+└── .env.example                # Exemplo de variáveis de ambiente
 ```
 
-### 2. Configurar o ambiente
-Crie o arquivo `.env` baseado no exemplo fornecido:
+---
+
+## ✅ Pré-requisitos
+
+| Ferramenta | Versão mínima |
+|---|---|
+| Node.js | 20+ |
+| npm | 9+ |
+| Docker | 24+ |
+| Docker Compose | v2+ |
+
+---
+
+## ⚙️ Variáveis de Ambiente
+
+### Backend
+
+Copie o arquivo de exemplo e ajuste os valores:
+
 ```bash
 cp .env.example .env
 ```
-Variáveis de ambiente principais:
-- `DB_HOST`, `DB_PORT`: Configurações do banco de dados
-- `DB_USERNAME`, `DB_PASSWORD`: Credenciais do banco
 
-### 3. Instalar dependências
+| Variável | Padrão | Descrição |
+|---|---|---|
+| `DB_HOST` | `localhost` | Host do banco de dados |
+| `DB_PORT` | `5432` | Porta do PostgreSQL |
+| `DB_USERNAME` | `petcomvoce_user` | Usuário do banco |
+| `DB_PASSWORD` | `petcomvoce_password` | Senha do banco |
+| `DB_DATABASE` | `petcomvoce_db` | Nome do banco |
+| `NODE_ENV` | `development` | Ambiente da aplicação |
+| `PORT` | `3000` | Porta em que a API sobe |
+| `CORS_ORIGIN` | `http://localhost:5173` | Origens permitidas (separadas por vírgula) |
+
+### Frontend
+
+O frontend utiliza um proxy do Vite em desenvolvimento — nenhuma configuração extra é necessária. Para produção, crie `frontend/.env`:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+---
+
+## 🚀 Como Rodar
+
+### 🐳 Com Docker (recomendado)
+
+Sobe o banco de dados **e** a API backend juntos com um único comando:
+
+```bash
+# 1. Configure as variáveis de ambiente
+cp .env.example .env
+
+# 2. Suba os serviços
+docker compose up --build -d
+
+# 3. Acompanhe os logs (opcional)
+docker compose logs -f
+```
+
+> A API ficará disponível em `http://localhost:3000` assim que o health check do banco passar.
+
+Para parar os serviços:
+
+```bash
+docker compose down
+```
+
+Para parar **e remover os volumes** (apaga os dados do banco):
+
+```bash
+docker compose down -v
+```
+
+---
+
+### 🖥 Backend (manual)
+
+> Requer PostgreSQL rodando localmente ou via Docker.
+
+**1. Subir apenas o banco via Docker:**
+
+```bash
+docker compose up db -d
+```
+
+**2. Instalar dependências:**
+
 ```bash
 npm install
 ```
 
-### 4. Executar o sistema
+**3. Configurar variáveis de ambiente:**
+
 ```bash
-# Iniciar o servidor em modo de desenvolvimento
+cp .env.example .env
+# Edite o .env com suas configurações
+```
+
+**4. Rodar em modo desenvolvimento (com hot-reload):**
+
+```bash
 npm run start:dev
 ```
 
----
-
-## Testes Automatizados
-
-O projeto utiliza o framework Jest para testes unitários.
+**5. Ou compilar e rodar em produção:**
 
 ```bash
-# Executar todos os testes
+npm run build
+npm run start
+```
+
+---
+
+### 🌐 Frontend (manual)
+
+> Certifique-se de que o backend está rodando em `http://localhost:3000`.
+
+```bash
+# 1. Entre na pasta do frontend
+cd frontend
+
+# 2. Instale as dependências
+npm install
+
+# 3. Rode em modo desenvolvimento
+npm run dev
+```
+
+O frontend ficará disponível em **`http://localhost:5173`**.
+
+Em desenvolvimento, o Vite faz proxy automático das rotas `/api` e `/health` para `http://localhost:3000`, então nenhuma configuração adicional é necessária.
+
+---
+
+## 🧪 Testes
+
+```bash
+# Testes unitários
 npm run test
 
-# Executar testes gerando relatório de cobertura
+# Testes unitários com cobertura
 npm run test:cov
+
+# Testes e2e (requer banco de dados)
+npm run test:e2e
+
+# Todos os testes
+npm run test:all
 ```
 
 ---
 
-## Endpoints Principais
+## 🔗 URLs Úteis
 
-Abaixo estão alguns dos principais endpoints implementados e seus códigos de status HTTP (200, 201 para sucesso, 400, 404 para erro). Para mais detalhes, consulte `docs/api.md` e os arquivos `.http` em `docs/http/`.
-
-**Agendar Serviço** (`POST /api/appointments`)
-```json
-// Payload da requisição
-{
-  "petId": "uuid",
-  "serviceId": "uuid",
-  "date": "2023-11-20T14:30:00Z"
-}
-
-// Resposta 201 Created
-{
-  "id": "uuid",
-  "status": "SCHEDULED"
-}
-```
+| Serviço | URL |
+|---|---|
+| API (backend) | http://localhost:3000 |
+| Documentação Swagger | http://localhost:3000/api/docs |
+| Health check | http://localhost:3000/health |
+| Frontend | http://localhost:5173 |
 
 ---
 
-## Contribuição
+## 📄 Licença
 
-Siga o fluxo básico para contribuir:
-1. Crie uma branch com um prefixo indicativo (`feature/nome-da-feature`, `fix/nome-do-bug`).
-2. Faça commits claros referenciando a issue (ex: `feat(agendamento): cria endpoint de reserva`).
-3. Abra um Pull Request para a branch `main`.
-
-## Licença
-
-Este projeto está sob a licença MIT. Para mais detalhes, consulte o arquivo LICENSE.
+Distribuído sob a licença **MIT**. Veja [LICENSE](LICENSE) para mais informações.

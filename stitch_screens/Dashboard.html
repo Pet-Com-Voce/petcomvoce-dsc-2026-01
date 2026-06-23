@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pet Com Você - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "inverse-primary": "#006b55",
+                    "on-tertiary-container": "#00489d",
+                    "tertiary-fixed": "#d8e2ff",
+                    "outline": "#85948d",
+                    "on-primary-fixed": "#002118",
+                    "on-secondary-fixed": "#23005c",
+                    "primary-fixed-dim": "#28dfb5",
+                    "on-surface": "#dce2f7",
+                    "on-secondary-container": "#c4abff",
+                    "surface-container": "#191f2f",
+                    "inverse-surface": "#dce2f7",
+                    "on-primary-fixed-variant": "#00513f",
+                    "surface": "#0c1322",
+                    "on-primary": "#00382b",
+                    "surface-container-low": "#141b2b",
+                    "on-secondary": "#3c0091",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#293040",
+                    "surface-tint": "#28dfb5",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#2e3545",
+                    "secondary-container": "#571bc1",
+                    "tertiary": "#c7d7ff",
+                    "on-tertiary-fixed": "#001a42",
+                    "surface-dim": "#0c1322",
+                    "secondary-fixed": "#e9ddff",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "surface-bright": "#323949",
+                    "primary-container": "#00d4aa",
+                    "background": "#0c1322",
+                    "surface-container-lowest": "#070e1d",
+                    "on-tertiary-fixed-variant": "#004395",
+                    "on-primary-container": "#005643",
+                    "on-surface-variant": "#bacac2",
+                    "error-container": "#93000a",
+                    "secondary": "#d0bcff",
+                    "outline-variant": "#3b4a44",
+                    "tertiary-container": "#9cbbff",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "surface-container-highest": "#2e3545",
+                    "tertiary-fixed-dim": "#adc6ff",
+                    "on-background": "#dce2f7",
+                    "primary": "#46f1c5",
+                    "on-tertiary": "#002e6a",
+                    "primary-fixed": "#55fcd0",
+                    "surface-container-high": "#232a3a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xxl": "24px",
+                    "lg": "16px",
+                    "sm": "8px",
+                    "xl": "20px",
+                    "md": "12px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "h2": ["Inter"],
+                    "micro": ["Inter"],
+                    "h3": ["Inter"],
+                    "body": ["Inter"],
+                    "h1": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h2": ["17px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "micro": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["15px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600"}],
+                    "body": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "h1": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Hide scrollbar for horizontal scroll areas but keep functionality */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body flex flex-col overflow-x-hidden antialiased">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface fixed top-0 w-full z-40 border-b-0 shadow-none pointer-events-auto">
+<div class="flex justify-between items-center w-full px-lg py-md max-w-7xl mx-auto">
+<div class="flex items-center gap-sm">
+<!-- Leading Avatar with Online Status -->
+<div class="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A highly professional close-up headshot of a veterinarian in a modern, dark-themed clinic environment. Subtle cool teal lighting accents on the edges, conveying a high-tech, trustworthy, and calm corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLIYYoF7Zxfv6iRt4HfOc-WovYhSNNt1XEQBPYpopa_h030J6foyg6ZlXgdjNhtmh6jIL5OMBjSKokvuHs1acZBaDnEf3I4QZrlal149yBaUXdb5cj2Bm81kSc9WmRCRVKwc0-qLC10Jkm1OdsUddjZtQM_r-7l5O1KwTOpy3H4XHhSKMbXwovI5wuamqckWb49pBAribU8ROwVAFt9zqsXBForNYN1XCBVZJYyKCyKcL5Jeil_kGHUBSWKPIlC90OnGVp0DCSO30"/>
+<!-- Pulsing Green Dot -->
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-primary rounded-full border-2 border-surface shadow-[0_0_8px_rgba(70,241,197,0.6)] animate-pulse"></div>
+</div>
+<h1 class="font-h1 text-h1 font-bold text-primary dark:text-primary tracking-tight">Pet Com Você</h1>
+</div>
+<!-- Trailing Icon -->
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 dark:hover:bg-surface-variant/50 p-2 rounded-full scale-95 transition-transform flex items-center justify-center outline-none focus:ring-2 focus:ring-primary/50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-7xl mx-auto pt-[76px] pb-[96px] flex flex-col">
+<!-- Greeting Section -->
+<section class="px-lg pt-xl pb-md flex flex-col gap-xs">
+<h2 class="font-h2 text-h2 text-on-background">Bom dia, Dr. Carlos</h2>
+<p class="font-body text-body text-on-surface-variant">Segunda, 24 de Maio</p>
+</section>
+<!-- Stat Cards (Horizontal Scroll Bento) -->
+<section class="w-full relative">
+<div class="flex overflow-x-auto gap-md px-lg pb-lg pt-sm snap-x snap-mandatory scrollbar-hide">
+<!-- Stat Card: Total -->
+<article class="min-w-[140px] flex-shrink-0 bg-surface rounded-xl p-md border border-outline-variant snap-start relative overflow-hidden shadow-sm flex flex-col justify-between min-h-[100px]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full pointer-events-none"></div>
+<p class="font-caption text-caption text-on-surface-variant relative z-10">Total</p>
+<p class="font-h1 text-h1 text-on-background font-bold mt-sm relative z-10">42</p>
+</article>
+<!-- Stat Card: Pendentes -->
+<article class="min-w-[140px] flex-shrink-0 bg-surface rounded-xl p-md border border-outline-variant snap-start relative overflow-hidden shadow-sm flex flex-col justify-between min-h-[100px]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-error/20 to-transparent rounded-bl-full pointer-events-none"></div>
+<p class="font-caption text-caption text-on-surface-variant relative z-10">Pendentes</p>
+<p class="font-h1 text-h1 text-on-background font-bold mt-sm relative z-10">8</p>
+</article>
+<!-- Stat Card: Em Andamento -->
+<article class="min-w-[140px] flex-shrink-0 bg-surface rounded-xl p-md border border-outline-variant snap-start relative overflow-hidden shadow-sm flex flex-col justify-between min-h-[100px]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-tertiary/20 to-transparent rounded-bl-full pointer-events-none"></div>
+<p class="font-caption text-caption text-on-surface-variant relative z-10">Em Andamento</p>
+<p class="font-h1 text-h1 text-on-background font-bold mt-sm relative z-10">5</p>
+</article>
+<!-- Stat Card: Concluídos -->
+<article class="min-w-[140px] flex-shrink-0 bg-surface rounded-xl p-md border border-outline-variant snap-start relative overflow-hidden shadow-sm flex flex-col justify-between min-h-[100px]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full pointer-events-none"></div>
+<p class="font-caption text-caption text-on-surface-variant relative z-10">Concluídos</p>
+<p class="font-h1 text-h1 text-on-background font-bold mt-sm relative z-10">29</p>
+</article>
+</div>
+<!-- Subtle fade out on the right edge to indicate scroll -->
+<div class="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
+</section>
+<!-- Próximos Agendamentos Section -->
+<section class="px-lg flex flex-col gap-md mt-md">
+<div class="flex justify-between items-center mb-xs">
+<h3 class="font-h3 text-h3 text-on-background">Próximos Agendamentos</h3>
+<button class="font-caption text-caption text-primary hover:text-primary-fixed transition-colors">Ver todos</button>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Appointment Card 1 -->
+<article class="bg-surface rounded-lg flex items-stretch border border-outline-variant overflow-hidden relative shadow-sm group hover:bg-surface-variant/30 transition-colors cursor-pointer">
+<div class="w-1 bg-tertiary flex-shrink-0"></div>
+<div class="p-md flex justify-between items-center w-full">
+<div class="flex flex-col">
+<h4 class="font-h3 text-h3 text-on-background">Bidu (Golden Retriever)</h4>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Cliente: Ana Silva</p>
+</div>
+<div class="flex flex-col items-end">
+<p class="font-h3 text-h3 text-tertiary">10:00</p>
+<span class="inline-flex items-center justify-center mt-xs bg-tertiary/10 text-tertiary font-micro text-micro px-2 py-0.5 rounded-full border border-tertiary/20">Banho/Tosa</span>
+</div>
+</div>
+</article>
+<!-- Appointment Card 2 -->
+<article class="bg-surface rounded-lg flex items-stretch border border-outline-variant overflow-hidden relative shadow-sm group hover:bg-surface-variant/30 transition-colors cursor-pointer">
+<div class="w-1 bg-secondary flex-shrink-0"></div>
+<div class="p-md flex justify-between items-center w-full">
+<div class="flex flex-col">
+<h4 class="font-h3 text-h3 text-on-background">Luna (Persa)</h4>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Cliente: Marcos Paulo</p>
+</div>
+<div class="flex flex-col items-end">
+<p class="font-h3 text-h3 text-secondary">11:30</p>
+<span class="inline-flex items-center justify-center mt-xs bg-secondary/10 text-secondary font-micro text-micro px-2 py-0.5 rounded-full border border-secondary/20">Consulta</span>
+</div>
+</div>
+</article>
+<!-- Appointment Card 3 -->
+<article class="bg-surface rounded-lg flex items-stretch border border-outline-variant overflow-hidden relative shadow-sm group hover:bg-surface-variant/30 transition-colors cursor-pointer">
+<div class="w-1 bg-primary flex-shrink-0"></div>
+<div class="p-md flex justify-between items-center w-full">
+<div class="flex flex-col">
+<h4 class="font-h3 text-h3 text-on-background">Thor (Bulldog)</h4>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Cliente: Juliana Costa</p>
+</div>
+<div class="flex flex-col items-end">
+<p class="font-h3 text-h3 text-primary">14:00</p>
+<span class="inline-flex items-center justify-center mt-xs bg-primary/10 text-primary font-micro text-micro px-2 py-0.5 rounded-full border border-primary/20">Vacina</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-[88px] right-lg w-[56px] h-[56px] bg-primary text-surface-dim rounded-xl flex items-center justify-center shadow-[0_4px_16px_rgba(70,241,197,0.25)] z-40 transition-transform active:scale-90 hover:brightness-110 outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-safe h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-md rounded-t-xl border-t-0 border-none shadow-[0_-4px_24px_rgba(0,0,0,0.4)] pointer-events-auto md:hidden">
+<!-- Tab 1: Dashboard (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary border-t-2 border-primary pt-1 scale-95 active:scale-90 transition-all w-16 relative" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-caption text-caption">Dashboard</span>
+<!-- Active Glow -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary blur-[2px] opacity-50 rounded-b-full"></div>
+</a>
+<!-- Tab 2: Agendamentos -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all w-16 border-t-2 border-transparent" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+<span class="font-caption text-caption">Agendamentos</span>
+</a>
+<!-- Tab 3: Pets -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all w-16 border-t-2 border-transparent" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">pets</span>
+<span class="font-caption text-caption">Pets</span>
+</a>
+<!-- Tab 4: Funcionários -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant pt-1 hover:text-primary-container dark:hover:text-primary-container scale-95 active:scale-90 transition-all w-16 border-t-2 border-transparent" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">badge</span>
+<span class="font-caption text-caption">Funcionários</span>
+</a>
+</nav>
+</body></html>
