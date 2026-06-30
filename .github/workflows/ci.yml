@@ -1,18 +1,44 @@
-name: Backend CI
+name: CI
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [main, master, develop, feature/**]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [main, master, develop]
 
 jobs:
-  build-and-test:
+  backend-unit:
+    name: Backend – Testes Unitários
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Testes unitários
+        run: npm run test:cov
+
+      - name: Upload cobertura
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-backend
+          path: coverage/
+
+  backend-e2e:
+    name: Backend – Testes E2E
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:15
+        image: postgres:16
         env:
           POSTGRES_USER: petcomvoce_user
           POSTGRES_PASSWORD: petcomvoce_password
@@ -20,40 +46,97 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U petcomvoce_user -d petcomvoce_db"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
+    env:
+      PORT: 3000
+      NODE_ENV: test
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USERNAME: petcomvoce_user
+      DB_PASSWORD: petcomvoce_password
+      DB_DATABASE: petcomvoce_db
+      JWT_SECRET: ci-secret-key-com-mais-de-32-caracteres-ok
+      JWT_EXPIRATION: 1d
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm install
+      - uses: actions/checkout@v4
 
-    - name: Build project
-      run: npm run build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-    - name: Run Unit Tests
-      run: npm run test:unit
+      - name: Instalar dependências
+        run: npm ci
 
-    - name: Run E2E Tests
-      env:
-        DB_HOST: localhost
-        DB_PORT: 5432
-        DB_USERNAME: petcomvoce_user
-        DB_PASSWORD: petcomvoce_password
-        DB_DATABASE: petcomvoce_db
-        NODE_ENV: test
-      run: npm run test:e2e
+      - name: Testes E2E
+        run: npm run test:e2e
+
+  frontend:
+    name: Frontend – Lint e Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  docker-build:
+    name: Docker – Build e Publicar imagem do backend
+    runs-on: ubuntu-latest
+    needs: [backend-unit, backend-e2e]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login no GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extrair metadados (tags e labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/petcomvoce-backend
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix=sha-
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+
+      - name: Build e push da imagem Docker
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
